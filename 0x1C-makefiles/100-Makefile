@@ -1,0 +1,25 @@
+#!/usr/bin/make
+
+CC = gcc
+SRC = $(wildcard *.c)
+OBJ = $(SRC:.c=.o)
+NAME = school
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $@
+
+%.o: %.c m.h
+	$(CC) -c $< -o $@
+
+clean:
+	$(RM) $(wildcard *~) $(NAME)
+
+oclean:
+	$(RM) $(OBJ)
+
+fclean: clean oclean
+
+re: fclean all
+
