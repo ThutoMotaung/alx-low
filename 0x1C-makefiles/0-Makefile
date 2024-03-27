@@ -1,5 +1,23 @@
+# Define the 'all' target
 all: school
 
-school:
-    gcc main.c school.c -o school
+# Define the 'school' target and its dependencies
+school: main.o school.o
+	gcc main.o school.o -o school
+
+# Compile main.c into main.o
+main.o: main.c
+	gcc -c main.c -o main.o
+
+# Compile school.c into school.o
+school.o: school.c
+	gcc -c school.c -o school.o
+
+# Clean rule to remove object files and the executable
+clean:
+	rm -f *.o school
+
+.PHONY: rebuild
+rebuild:
+	make -B all
 
