@@ -4,7 +4,7 @@
 CC = gcc
 
 # Source files
-SRC = $(wildcard *.c)
+SRC = main.c school.c
 
 # Object files
 OBJ = $(SRC:.c=.o)
@@ -22,18 +22,19 @@ CFLAGS = -Wall -Werror -Wextra -pedantic
 all: $(NAME)
 
 $(NAME): $(OBJ)
-    $(CC) $(OBJ) -o $(NAME)
+	$(CC) $(OBJ) -o $(NAME)
 
 # Rule for cleaning Emacs and Vim temporary files along with the executable
 clean:
-	$(RM) $(NAME) *~ \#*\#
+	$(RM) $(NAME) *~ \#*\# clean
 
 # Rule for cleaning object files
 oclean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) oclean
 
 # Rule for cleaning all Emacs and Vim temporary files, the executable, and object files
 fclean: clean oclean
+	$(RM) fclean
 
 # Rule to force recompilation of all source files
 re: fclean all
@@ -42,4 +43,3 @@ re: fclean all
 ifeq ($(wildcard m.h),)
 $(error Header file m.h is missing)
 endif
-
